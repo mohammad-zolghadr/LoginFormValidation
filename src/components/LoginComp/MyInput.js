@@ -3,7 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import style from './MyInput.module.css';
 
 const MyInput = (props) => {
-  const { type, name, value, onChangeMethod, label } = props;
+  const { type, name, value, onChangeMethod, label, onBlurInput, error, showError } =
+    props;
 
   const [modal, setModal] = useState(false);
   const modalRef = useRef(null);
@@ -12,28 +13,39 @@ const MyInput = (props) => {
     setModal(!modal);
   };
 
-  //   useEffect(() => {
-  //     return () => {
-  //       modal ? (modalRef.current.style.top = '-300%') : (modalRef.current.style.top = '0');
-  //     };
-  //   }, [modal]);
-
   let jsx = '';
   if (type !== 'checkbox') {
     jsx = (
       <div className={style.fPart}>
         <label>{label}</label>
-        <input onChange={onChangeMethod} type={type} name={name} value={value} />
+        <input
+          onBlur={onBlurInput}
+          onChange={onChangeMethod}
+          type={type}
+          name={name}
+          value={value}
+        />
+        {error && showError && <span className={style.error}>{error}</span>}
       </div>
     );
   } else {
     jsx = (
-      <div className={style.fPartHo}>
-        <label onClick={showPrivacyAndPolicy} className={style.privacyPolicy}>
-          {label}
-        </label>
-        <input type={type} name={name} value={value} onChange={onChangeMethod} />
-      </div>
+      <>
+        <div className={style.fPartHo}>
+          <label onClick={showPrivacyAndPolicy} className={style.privacyPolicy}>
+            {label}
+          </label>
+          <input
+            onBlur={onBlurInput}
+            type={type}
+            name={name}
+            value={value}
+            onChange={onChangeMethod}
+          />
+        </div>
+        {console.log(error)}
+        {error && showError && <span className={style.error}>{error}</span>}
+      </>
     );
   }
   return (

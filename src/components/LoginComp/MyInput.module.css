@@ -51,6 +51,16 @@ label {
     justify-content: space-between;
 }
 
+.error{
+    transition: all 0.3s ease;
+    color: var(--error-color);
+    background-color: #ffc1b8;
+    margin-top: 8px;
+    padding: 2px;
+    width: fit-content;
+    font-size: 0.7rem;
+}
+
 
 .privacyPolicy {
     cursor: pointer;

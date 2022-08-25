@@ -4,19 +4,27 @@ import { Link } from 'react-router-dom';
 import style from './Login.module.css';
 import MyInput from './MyInput';
 import ReCaptcha from '../ReCaptcha';
+import CheckValidation from '../../CheckValidation';
 
 const Signup = () => {
   const [data, setData] = useState({
     username: '',
     email: '',
     password: '',
-    confrimPassword: '',
+    confirmPassword: '',
     isAccepted: false,
   });
 
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
+  const [showError, setShowError] = useState(false);
+
+  const [error, setError] = useState({});
+
+  useEffect(() => {}, [data, error]);
+
+  const validationHandler = () => {
+    setError(CheckValidation(data, 'signup'));
+    setShowError(true);
+  };
 
   const inputHandler = (event) => {
     if (event.target.name === 'isAccepted') {
@@ -28,6 +36,17 @@ const Signup = () => {
 
   const submitForm = (event) => {
     event.preventDefault();
+    if (
+      !error.email &&
+      !error.password &&
+      !error.confirmPassword &&
+      !error.username &&
+      error.isAccepted
+    ) {
+      alert('Signup Successfully');
+    } else {
+      validationHandler();
+    }
   };
 
   return (
@@ -36,6 +55,9 @@ const Signup = () => {
         <form onSubmit={submitForm}>
           <h2>Hi Friend</h2>
           <MyInput
+            showError={showError}
+            onBlurInput={validationHandler}
+            error={error.username}
             label="UserName"
             type="text"
             name="username"
@@ -43,6 +65,9 @@ const Signup = () => {
             onChangeMethod={inputHandler}
           />
           <MyInput
+            showError={showError}
+            onBlurInput={validationHandler}
+            error={error.email}
             label="Email"
             type="email"
             name="email"
@@ -50,6 +75,9 @@ const Signup = () => {
             onChangeMethod={inputHandler}
           />
           <MyInput
+            showError={showError}
+            onBlurInput={validationHandler}
+            error={error.password}
             label="Password"
             type="password"
             name="password"
@@ -57,18 +85,24 @@ const Signup = () => {
             onChangeMethod={inputHandler}
           />
           <MyInput
-            label="ConfrimPassword"
+            showError={showError}
+            onBlurInput={validationHandler}
+            error={error.confirmPassword}
+            label="confirmPassword"
             type="password"
-            name="confrimPassword"
-            value={data.confrimPassword}
+            name="confirmPassword"
+            value={data.confirmPassword}
             onChangeMethod={inputHandler}
           />
           <MyInput
+            showError={showError}
+            onBlurInput={validationHandler}
+            error={error.isAccepted}
             label="I Accept Privacy & Policy (Click to read)"
             type="checkbox"
             name="isAccepted"
             value={data.isAccepted}
-            onChange={inputHandler}
+            onChangeMethod={inputHandler}
           />
           <ReCaptcha />
           <div className={style.bPart}>
