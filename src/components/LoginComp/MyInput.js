@@ -1,13 +1,25 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import style from './MyInput.module.css';
 
 const MyInput = (props) => {
-  const { type, name, value, onChangeMethod, label, onBlurInput, error, showError } =
-    props;
+  const location = useLocation();
+
+  const {
+    type,
+    name,
+    value,
+    onChangeMethod,
+    label,
+    onBlurInput,
+    error,
+    showError,
+    generatePassword,
+    showPassword,
+  } = props;
 
   const [modal, setModal] = useState(false);
-  const modalRef = useRef(null);
 
   const showPrivacyAndPolicy = () => {
     setModal(!modal);
@@ -17,9 +29,27 @@ const MyInput = (props) => {
   if (type !== 'checkbox') {
     jsx = (
       <div className={style.fPart}>
-        <label>{label}</label>
+        <div className={style.titleField}>
+          <label>{label}</label>
+          {name === 'password' && (
+            <div>
+              {location.pathname === '/signup' && (
+                <i
+                  title="generate strong password"
+                  className={'fa fa-key'}
+                  onClick={generatePassword}
+                />
+              )}
+              <i
+                title="show/hide password"
+                className={'fa fa-eye'}
+                onClick={showPassword}
+              />
+            </div>
+          )}
+        </div>
         <input
-          onBlur={onBlurInput}
+          onBlur={() => onBlurInput(name)}
           onChange={onChangeMethod}
           type={type}
           name={name}
@@ -36,14 +66,13 @@ const MyInput = (props) => {
             {label}
           </label>
           <input
-            onBlur={onBlurInput}
+            onBlur={() => onBlurInput(name)}
             type={type}
             name={name}
             value={value}
             onChange={onChangeMethod}
           />
         </div>
-        {console.log(error)}
         {error && showError && <span className={style.error}>{error}</span>}
       </>
     );
@@ -51,12 +80,8 @@ const MyInput = (props) => {
   return (
     <>
       {jsx}
-      {
-        <div
-          ref={modalRef}
-          className={style.modal}
-          style={modal ? { top: '0' } : { top: '-200%' }}
-        >
+      {modal && (
+        <div className={style.modal}>
           <h2>Terms of Service and Privacy Policy</h2>
           <div>
             <p>
@@ -83,9 +108,9 @@ const MyInput = (props) => {
               </li>
             </ul>
           </div>
-          <button onClick={showPrivacyAndPolicy}>I read this content</button>
+          <button onClick={showPrivacyAndPolicy}>I Read This Content</button>
         </div>
-      }
+      )}
     </>
   );
 };
