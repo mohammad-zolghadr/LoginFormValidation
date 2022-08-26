@@ -35,6 +35,7 @@ const Signup = () => {
   });
 
   useEffect(() => {
+    document.title = 'Sign Up';
     setError(CheckValidation(data, 'signup'));
   }, [data, showError, visiblilityPassword]);
 

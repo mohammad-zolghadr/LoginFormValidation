@@ -31,6 +31,7 @@ const Login = () => {
   });
 
   useEffect(() => {
+    document.title = 'Login';
     setError(CheckValidation(data, 'login'));
   }, [data, showError, visiblilityPassword]);
 
