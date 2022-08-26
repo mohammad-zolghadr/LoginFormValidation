@@ -16,8 +16,7 @@ Login & Signup Page :
 
 
 <div style="display:flex" align="center">
-<img src="https://user-images.githubusercontent.com/48680310/187001667-27439913-8bc9-49eb-9376-4dbde0affae7.png" style="width:30%"/>
-<img src="https://user-images.githubusercontent.com/48680310/187001664-eea97c5b-2894-4303-97ad-05f9826a768f.png" style="width:30%"/>
-<img src="https://user-images.githubusercontent.com/48680310/187001665-f94d31b9-328e-4538-a3fc-e8064395ff2d.png" style="width:30%"/>
+<img src="https://user-images.githubusercontent.com/48680310/187001878-53729293-b3ec-4f16-a1e0-3a3d060c2361.png" style="width:30%"/>
+<img src="https://user-images.githubusercontent.com/48680310/187001877-4b131eeb-4673-4a70-a77f-04947bdc8719.png" style="width:30%"/>
+<img src="https://user-images.githubusercontent.com/48680310/187001875-39bca7ff-e842-4013-b3c6-f2dab09f93ed.png" style="width:30%"/>
 </div>
-
