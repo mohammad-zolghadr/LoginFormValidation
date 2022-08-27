@@ -5,15 +5,29 @@
     justify-content: center;
 }
 
+form{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+form h2{
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
 .bPart button{
-    width: 100%;
+    width: 250px;
     background-image: linear-gradient(to left , var(--primary-color) , var(--primary-color-dark));
     color: #fff;
     padding: 10px 20px;
     border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s ease;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 
